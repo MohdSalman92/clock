@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex-center">
+    <div class="container">
+        <div class="digital flex-center">
+            <span class="d-hour flex-center" id="d-hr">00</span>
+            <span class="flex-center">:</span>
+            <span class="d-min flex-center" id="d-mn">00</span>
+            <span class="flex-center">:</span>
+            <span class="d-sec flex-center" id="d-sc">00</span>
+            <span class="session flex-center" id="session"></span>
+        </div>
+    <div class="analog flex-center">
+        <div class="c-face">
+            <span onclick="face1()">Face1</span>
+            <span onclick="face2()">Face2</span>
+            <span onclick="face3()">Face3</span>
+            <span onclick="face4()">Face4</span>
+        </div>
+        <div class="clock flex-center">
+            
+            <div class="hour">
+                <div class="hr" id="hr"></div>
+            </div>
+            <div class="min">
+                <div class="mn" id="mn"></div>
+            </div>
+            <div class="sec">
+                <div class="sc" id="sc"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script> 
+let hr = document.getElementById("hr");
+let mn = document.getElementById("mn");
+let sc = document.getElementById("sc");
+let displayTime = () =>{
+    let date = new Date();// return Date
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+
+    //.....digital logic............
+    if(hh<10){
+    document.getElementById("d-hr").innerHTML = "0"+hh;
+    }else
+    document.getElementById("d-hr").innerHTML = hh;
+    if(mm<10){
+    document.getElementById('d-mn').innerHTML = "0"+mm;
+    }else
+    document.getElementById('d-mn').innerHTML = mm;
+    if(ss<10){
+    document.getElementById('d-sc').innerHTML = "0"+ss;
+    }else
+    document.getElementById('d-sc').innerHTML = ss;
+    if(hh<12){
+    document.getElementById('session').innerHTML = "AM";
+    }else{
+    document.getElementById('session').innerHTML = "PM";
+    }
+
+    //....Anlog logic............
+    let hRotation = (30*hh + (mm/12));
+    let mRotation = 6*mm;
+    let sRotation = 6*ss;
+
+    hr.style.transform = `rotate(${hRotation}deg)`;
+    mn.style.transform = `rotate(${mRotation}deg)`;
+    sc.style.transform = `rotate(${sRotation}deg)`;
+}
+
+setInterval(displayTime, 1000);
+//   Clock face...............
+const root = document.querySelector(':root');
+    function face1(){
+      root.style.setProperty('--image-url', 'url(image/face1.webp)');
+    }
+    function face2(){
+      root.style.setProperty('--image-url', 'url(image/face2.jpg)');
+    }
+    function face3(){
+      root.style.setProperty('--image-url', 'url(image/face3.webp)');
+    }
+    function face4(){
+      root.style.setProperty('--image-url', 'url(image/face4.png)');
+    }
+</script>
+</body>
+</html>
