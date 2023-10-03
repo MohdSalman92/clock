@@ -49,10 +49,15 @@ let displayTime = () =>{
     let ss = date.getSeconds();
 
     //.....digital logic............
-    if(hh<10){
-    document.getElementById("d-hr").innerHTML = "0"+hh;
+    if(hh>12){
+        let h = hh-12;
+        if(h<10){
+    document.getElementById("d-hr").innerHTML = "0"+h;
     }else
-    document.getElementById("d-hr").innerHTML = hh;
+    document.getElementById("d-hr").innerHTML = h;
+
+    }
+    
     if(mm<10){
     document.getElementById('d-mn').innerHTML = "0"+mm;
     }else
